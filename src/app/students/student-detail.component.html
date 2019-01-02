@@ -3,9 +3,52 @@
         {{pageTitle + ': ' + studentDetail.FirstName}}
     </div>
 
-    <div class="card-footer">
-        <button class="btn btn-outline-secondary" (click)='onBack()' style="width:80px">
-<i class="fa fa-chevron-left"></i> Back
-</button>
+    <div class="card-body" *ngIf="studentDetail">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">Code:</div>
+                    <div class="col-md-6">{{studentDetail.StuddentId}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Name:</div>
+                    <div class="col-md-6">{{studentDetail.FirstName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Last Name:</div>
+                    <div class="col-md-6">{{studentDetail.LastName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Write With:</div>
+                    <div class="col-md-6">{{studentDetail.WriteWith}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">BirthDate:</div>
+                    <div class="col-md-6">{{studentDetail.BirthDate}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Age:</div>
+                    <div class="col-md-6">{{studentDetail.Age}}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-outline-secondary mr-3" style="width:80px" (click)="onBack()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+                <button class="btn btn-outline-primary" style="width:80px" [routerLink]="['/students', studentDetail.id, 'edit']">
+          Edit
+        </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
     </div>
 </div>>

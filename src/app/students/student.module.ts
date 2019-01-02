@@ -11,9 +11,7 @@ import { StudentRoutingModule } from './student-routing.module';
     StudentsComponent,   
     StudentDetailComponent,
   ],
-  imports: [
-
-   
+  imports: [   
     SharedModule,
     StudentRoutingModule
   ]

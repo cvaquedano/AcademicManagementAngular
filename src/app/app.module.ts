@@ -5,6 +5,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentModule } from './students/student.module';
 import { AppRoutingModule } from './app-routing.module';
+import { AsignatureModule } from './asignatures/asignature.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,10 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
    
     StudentModule,
+    AsignatureModule,
+
     AppRoutingModule
+    
   
   ],
   providers: [],

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IStudent } from './student';
 import { ActivatedRoute, Router } from '@angular/router';
+import { StudentService } from './student.service';
 
 @Component({
   selector: 'am-student-detail',
@@ -10,21 +11,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class StudentDetailComponent implements OnInit {
 
   pageTitle:string ='Student Detail'
-  studentDetail:IStudent;
-  constructor(private route:ActivatedRoute,private router: Router) { }
+  studentDetail:IStudent| undefined;
+  errorMessage = '';
+  
+  
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private studentService: StudentService) {
+  }
 
   ngOnInit() {
-    let id = +this.route.snapshot.paramMap.get('id');
-    this.pageTitle+=`: ${id}`;
-    this.studentDetail = {
-      StudentId:id,
-      FirstName:"Carlos",
-      Age:30,
-      LastName:'vaquedano',
-      WriteWith:'Derecha',
-      BirthDate:'1988-04-14'
+    const param = this.route.snapshot.paramMap.get('id');
+    if (param) {
+      const id = +param;
+      this.getStudent(id);
     }
-  }  
+  }
+
+  getStudent(id: number) {
+    this.studentService.getStudent(id).subscribe(
+      student => this.studentDetail = student,
+      error => this.errorMessage = <any>error);
+  }
+  
 
   onBack(): void{
     this.router.navigate(['/students']);
