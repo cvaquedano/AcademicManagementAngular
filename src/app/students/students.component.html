@@ -34,9 +34,14 @@
                 <tbody>
                     <tr *ngFor='let student of filteredStudents'>
                         <td></td>
-                        <td>{{student.studentId}}</td>
-                        <td>{{student.firstName |lowercase }}</td>
-                        <td>{{student.lastName}}</td>
+                        <td>
+                            <a [routerLink]="['/students', student.StudentId]">
+                                {{student.StudentId}}
+                            </a>
+
+                        </td>
+                        <td>{{student.FirstName |lowercase }}</td>
+                        <td>{{student.LastName}}</td>
                         <td>{{student.WriteWith}}</td>
                         <td>{{student.BirthDate}}</td>
                         <td>{{student.Age}}</td>

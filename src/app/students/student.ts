@@ -1,7 +1,7 @@
 export interface IStudent{
-    studentId:number,
-    firstName: string,
-    lastName: string,
+    StudentId:number,
+    FirstName: string,
+    LastName: string,
     WriteWith: string,
     BirthDate: string,
     Age: number

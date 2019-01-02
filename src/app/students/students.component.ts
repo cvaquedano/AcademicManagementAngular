@@ -38,7 +38,7 @@ export class StudentsComponent implements OnInit {
       filterBy=filterBy.toLocaleLowerCase();
 
       return this.students.filter((student:IStudent)=>
-      student.firstName.toLocaleLowerCase().indexOf(filterBy)!==-1);
+      student.FirstName.toLocaleLowerCase().indexOf(filterBy)!==-1);
   }
   ngOnInit(): void {
     
