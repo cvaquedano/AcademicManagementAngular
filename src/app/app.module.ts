@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { StudentModule } from './students/student.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,14 +17,8 @@ import { StudentModule } from './students/student.module';
     BrowserModule,
     HttpClientModule,
    
-    RouterModule.forRoot([
-     
-      {path:'welcome',component: WelcomeComponent},
-      {path:'',redirectTo: 'welcome',pathMatch:'full'},
-      {path:'**',redirectTo: 'welcome',pathMatch:'full'}
-
-    ]),
-    StudentModule
+    StudentModule,
+    AppRoutingModule
   
   ],
   providers: [],

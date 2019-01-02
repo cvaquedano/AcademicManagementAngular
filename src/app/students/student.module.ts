@@ -4,6 +4,7 @@ import { StudentDetailComponent } from './student-detail.component';
 import { RouterModule } from '@angular/router';
 import { StudentDetailGuard } from './student-detail.guard';
 import { SharedModule } from '../shared/shared.module';
+import { StudentRoutingModule } from './student-routing.module';
 
 @NgModule({
   declarations: [ 
@@ -12,13 +13,9 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
 
-    RouterModule.forChild([
-      {path:'students',component: StudentsComponent},
-      {path:'students/:id',
-      canActivate:[StudentDetailGuard],
-      component: StudentDetailComponent},]
-    ),
-    SharedModule
+   
+    SharedModule,
+    StudentRoutingModule
   ]
 })
 export class StudentModule { }
