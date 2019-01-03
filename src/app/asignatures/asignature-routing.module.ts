@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AsignatureListComponent } from './asignature-list.component';
+import { AsignatureListComponent } from './asignature-list/asignature-list.component';
 import { AsignatureDetailComponent } from './asignature-detail/asignature-detail.component';
 import { AsignatureFormComponent } from './asignature-form/asignature-form.component';
+import { NumericIdGuard } from '../shared/guards/numericId.guard';
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild([
-      {path:'asignature',component: AsignatureListComponent},
+      {path:'asignatures',component: AsignatureListComponent},
       {path:'asignatureForm',component: AsignatureFormComponent},
-      {path:'asignature/:id',
-      //canActivate:[StudentDetailGuard],
+      {path:'asignatures/:id',
+      canActivate:[NumericIdGuard],
       component: AsignatureDetailComponent},]
     ),
   ],

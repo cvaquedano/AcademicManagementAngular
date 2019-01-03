@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IStudent } from './student';
+import { IStudent } from '../student';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from './student.service';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'am-student-detail',
@@ -13,8 +13,7 @@ export class StudentDetailComponent implements OnInit {
   pageTitle:string ='Student Detail'
   studentDetail:IStudent| undefined;
   errorMessage = '';
-  
-  
+    
   constructor(private route: ActivatedRoute,
     private router: Router,
     private studentService: StudentService) {

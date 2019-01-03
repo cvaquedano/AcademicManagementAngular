@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { StudentsComponent } from './students.component';
-import { StudentDetailComponent } from './student-detail.component';
-import { RouterModule } from '@angular/router';
-import { StudentDetailGuard } from './student-detail.guard';
+import { StudentsComponent } from './student-list/students.component';
+import { StudentDetailComponent } from './Student-detail/student-detail.component';
 import { SharedModule } from '../shared/shared.module';
 import { StudentRoutingModule } from './student-routing.module';
 
@@ -17,3 +15,4 @@ import { StudentRoutingModule } from './student-routing.module';
   ]
 })
 export class StudentModule { }
+

@@ -9,8 +9,7 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="NameId">Name</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="NameId" type="text" placeholder="Name (required)" required minlength="2" formControlName='name' [ngClass]="{'is-invalid': (asignatureForm.get('name').touched || asignatureForm.get('name').dirty) && !asignatureForm.get('name').valid }"
-                    />
+                    <input class="form-control" id="NameId" type="text" placeholder="Name (required)" formControlName='name' [ngClass]="{'is-invalid': (asignatureForm.get('name').touched || asignatureForm.get('name').dirty) && !asignatureForm.get('name').valid }" />
                     <span class="invalid-feedback">
             <span *ngIf="asignatureForm.get('name').errors?.required">
               Please enter the asignature name.
@@ -25,7 +24,7 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="descriptionId" type="text" placeholder="Description (required)" required maxlength="50" formControlName='description' [ngClass]="{'is-invalid': (asignatureForm.get('description').touched || asignatureForm.get('description').dirty) && !asignatureForm.get('description').valid }"
+                    <input class="form-control" id="descriptionId" type="text" placeholder="Description (required)" formControlName='description' [ngClass]="{'is-invalid': (asignatureForm.get('description').touched || asignatureForm.get('description').dirty) && !asignatureForm.get('description').valid }"
                     />
                     <span class="invalid-feedback">
             <span *ngIf="asignatureForm.get('description').errors?.required">

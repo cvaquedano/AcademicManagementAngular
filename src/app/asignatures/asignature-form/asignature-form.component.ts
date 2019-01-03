@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validator, Validators } from '@angular/forms';
 import { Asignature } from '../asignature';
 
 @Component({
@@ -10,14 +10,14 @@ import { Asignature } from '../asignature';
 export class AsignatureFormComponent implements OnInit {
 
   asignatureForm:FormGroup;
-  asignature = new Asignature()
+  asignature = new Asignature() 
   
   constructor(private fb:FormBuilder) { }
 
   ngOnInit() {
     this.asignatureForm = this.fb.group({
-      name:'',
-      description:''
+      name:['',[Validators.required, Validators.minLength(2)]],
+      description:['',[Validators.required, Validators.maxLength(50)]],
     });
   }
 

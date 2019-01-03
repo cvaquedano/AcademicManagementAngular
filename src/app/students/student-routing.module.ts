@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { StudentsComponent } from './students.component';
-import { StudentDetailGuard } from './student-detail.guard';
-import { StudentDetailComponent } from './student-detail.component';
+import { StudentsComponent } from './student-list/students.component';
+import {  NumericIdGuard } from '../shared/guards/numericId.guard';
+import { StudentDetailComponent } from './Student-detail/student-detail.component';
 
 @NgModule({
   declarations: [],
@@ -10,7 +10,7 @@ import { StudentDetailComponent } from './student-detail.component';
     RouterModule.forChild([
       {path:'students',component: StudentsComponent},
       {path:'students/:id',
-      canActivate:[StudentDetailGuard],
+      canActivate:[NumericIdGuard],
       component: StudentDetailComponent},]
     ),
   ],
