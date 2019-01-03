@@ -45,7 +45,11 @@
                         <td>{{student.WriteWith}}</td>
                         <td>{{student.BirthDate}}</td>
                         <td>{{student.Age}}</td>
-
+                        <td>
+                            <button class="btn btn-outline-primary btn-sm" [routerLink]="['/students',student.StudentId, 'edit']">
+                              Edit
+                            </button>
+                        </td>
 
                     </tr>
 
