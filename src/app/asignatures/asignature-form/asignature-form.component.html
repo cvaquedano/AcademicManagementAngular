@@ -9,14 +9,10 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="NameId">Name</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="NameId" type="text" placeholder="Name (required)" formControlName='name' [ngClass]="{'is-invalid': (asignatureForm.get('name').touched || asignatureForm.get('name').dirty) && !asignatureForm.get('name').valid }" />
+                    <input class="form-control" id="NameId" type="text" placeholder="Name (required)" formControlName='name' [ngClass]="{'is-invalid': nameMessage }" />
                     <span class="invalid-feedback">
-            <span *ngIf="asignatureForm.get('name').errors?.required">
-              Please enter the asignature name.
-            </span>
-                    <span *ngIf="asignatureForm.get('name').errors?.minlength">
-              The Asignature name must be longer than 2 characters.
-            </span>
+                        {{nameMessage}}
+          
                     </span>
                 </div>
             </div>
@@ -28,7 +24,7 @@
                     />
                     <span class="invalid-feedback">
             <span *ngIf="asignatureForm.get('description').errors?.required">
-              Please enter your last name.
+              Please enter Description.
             </span>
                     <span *ngIf="asignatureForm.get('description').errors?.maxlength">
               The last name must be less than 50 characters.
