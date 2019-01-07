@@ -1,3 +1,43 @@
-<p>
-  asignature-detail works!
-</p>
+<div class="card" *ngIf='asignatureDetail'>
+    <div class="card-header">
+        {{pageTitle + ': ' + asignatureDetail.Name}}
+    </div>
+
+    <div class="card-body" *ngIf="asignatureDetail">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">Code:</div>
+                    <div class="col-md-6">{{asignatureDetail.AsignatureId}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Name:</div>
+                    <div class="col-md-6">{{asignatureDetail.Name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Last Name:</div>
+                    <div class="col-md-6">{{asignatureDetail.Description}}</div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-outline-secondary mr-3" style="width:80px" (click)="onBack()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+                <button class="btn btn-outline-primary" style="width:80px" [routerLink]="['/asignatures', asignatureDetail.AsignatureId, 'edit']">
+        Edit
+      </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
+    </div>
+</div>

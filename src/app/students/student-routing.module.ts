@@ -11,7 +11,12 @@ import { StudentDetailComponent } from './Student-detail/student-detail.componen
       {path:'students',component: StudentsComponent},
       {path:'students/:id',
       canActivate:[NumericIdGuard],
-      component: StudentDetailComponent},]
+      component: StudentDetailComponent},
+
+      {path:'students/:id/edit',
+      //canDeactivate:[AsignatureFormGuard],
+      component: StudentDetailComponent},
+    ]
     ),
   ],
   exports:[RouterModule]

@@ -108,8 +108,8 @@ export class AsignatureFormComponent implements OnInit {
     if (this.asignatureForm.valid) {
       if (this.asignatureForm.dirty) {
         const p = { ...this.asignature, ...this.asignatureForm.value };
-
-        if (p.id === 0) {
+console.log(p);
+        if (p.AsignatureId === 0) {
           this.asignatureService.createAsignature(p)
             .subscribe(
               () => this.onSaveComplete(),

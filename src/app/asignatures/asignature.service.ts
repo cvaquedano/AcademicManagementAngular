@@ -62,7 +62,7 @@ export class AsignatureService{
         const url = `${this.asignatureUrl}/${asignature.AsignatureId}`;
         return this.http.put<Asignature>(url,asignature,{headers:headers})
             .pipe(
-                tap(()=>console.log('updateAsignature: ' + asignature.AsignatureId)),
+                tap(()=>console.log('updateAsignature: ' + JSON.stringify(asignature))),
                 map(()=>asignature),
                 catchError(this.handleError)
             );

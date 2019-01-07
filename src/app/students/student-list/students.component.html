@@ -5,9 +5,7 @@
     <div class='card-body'>
         <div class='row'>
             <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
-                <input type='text' [(ngModel)]='listFilter' />
-            </div>
+
         </div>
         <div class='row'>
             <div class='col-md-6'>
@@ -18,11 +16,7 @@
             <table class='table' *ngIf='students && students.length'>
                 <thead>
                     <tr>
-                        <th>
-                            <button class='btn btn-primary'>
-              Show Image
-              </button>
-                        </th>
+
                         <th>Codigo</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
@@ -33,7 +27,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let student of filteredStudents'>
-                        <td></td>
+
                         <td>
                             <a [routerLink]="['/students', student.StudentId]">
                                 {{student.StudentId}}
