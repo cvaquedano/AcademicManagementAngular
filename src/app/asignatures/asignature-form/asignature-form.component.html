@@ -4,7 +4,7 @@
     </div>
 
     <div class="card-body">
-        <form novalidate (ngSubmit)="save()" [formGroup]='asignatureForm'>
+        <form novalidate (ngSubmit)="saveAsignature()" [formGroup]='asignatureForm'>
 
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="NameId">Name</label>
@@ -40,14 +40,20 @@
                     <button class="btn btn-primary mr-3" type="submit" style="width:80px" [title]="asignatureForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'" [disabled]="!asignatureForm.valid">
             Save
           </button>
-                    <button class="btn btn-outline-secondary" type="button" (click)="populateTestData()">
-              Test Data
+                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits" [routerLink]="['/asignatures']">
+                Cancel
+            </button>
+                    <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this Asignature" (click)="deleteAsignature()">
+            Delete
           </button>
+
                 </div>
             </div>
         </form>
     </div>
 </div>
+
+
 <br>Dirty: {{ asignatureForm.dirty }}
 <br>Touched: {{ asignatureForm.touched }}
 <br>Valid: {{ asignatureForm.valid }}

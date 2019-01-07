@@ -4,16 +4,23 @@ import { AsignatureListComponent } from './asignature-list/asignature-list.compo
 import { AsignatureDetailComponent } from './asignature-detail/asignature-detail.component';
 import { AsignatureFormComponent } from './asignature-form/asignature-form.component';
 import { NumericIdGuard } from '../shared/guards/numericId.guard';
+import { AsignatureFormGuard } from './asignature-form/asignature-form.guard';
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild([
       {path:'asignatures',component: AsignatureListComponent},
-      {path:'asignatureForm',component: AsignatureFormComponent},
+     
       {path:'asignatures/:id',
       canActivate:[NumericIdGuard],
-      component: AsignatureDetailComponent},]
+      component: AsignatureDetailComponent},
+
+      {path:'asignatures/:id/edit',
+      canDeactivate:[AsignatureFormGuard],
+      component: AsignatureFormComponent},
+    ]
+
     ),
   ],
   exports:[RouterModule]
