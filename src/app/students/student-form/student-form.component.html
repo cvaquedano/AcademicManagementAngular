@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-header">
+        Student Register
+    </div>
+
+    <div class="card-body">
+        <form novalidate (ngSubmit)="saveStudent()" [formGroup]='studentForm'>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="firstNameId">Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="firstNameId" type="text" placeholder="Name (required)" formControlName='firstName' [ngClass]="{'is-invalid': firstNameMessage }" />
+                    <span class="invalid-feedback">
+                      {{firstNameMessage}}
+        
+                  </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="lastNameId">Last Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="lastNameId" type="text" placeholder="Last Name (required)" formControlName='lastName' [ngClass]="{'is-invalid': lastNameMessage }" />
+                    <span class="invalid-feedback">
+         {{lastNameMessage}}
+                  </span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" type="submit" style="width:80px" [title]="studentForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'" [disabled]="!studentForm.valid">
+          Save
+        </button>
+                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits" [routerLink]="['/students']">
+              Cancel
+          </button>
+                    <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this Student" (click)="deleteStudent()">
+          Delete
+        </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<br>Dirty: {{ studentForm.dirty }}
+<br>Touched: {{ studentForm.touched }}
+<br>Valid: {{ studentForm.valid }}
+<br>Value: {{ studentForm.value | json }}

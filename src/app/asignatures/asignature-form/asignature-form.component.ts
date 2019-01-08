@@ -20,12 +20,18 @@ export class AsignatureFormComponent implements OnInit {
   errorMessage: string;
 
   nameMessage:string;
+  descriptionMessage:string;
 
   private sub:Subscription;
 
-  private validationMessages= {
+  private validationNameMessages= {
     required:'Please enter the asignature name.',
     minlength:'The Asignature name must be longer than 2 characters.'
+  }
+
+  private validationDescriptionMessages= {
+    required:'Please enter the asignature description.',
+    maxlength:'The Asignature description must not be longer than 50 characters.'
   }
   
   constructor(private fb:FormBuilder,
@@ -39,12 +45,7 @@ export class AsignatureFormComponent implements OnInit {
       description:['',[Validators.required, Validators.maxLength(50)]],
     });
 
-    const nameControl = this.asignatureForm.get('name');
-    nameControl.valueChanges
-    .pipe(debounceTime(1000))
-    .subscribe(
-      () => this.setMessage(nameControl)
-    );
+    this.formValidation();  
 
     this.sub = this.route.paramMap.subscribe(
       params => {
@@ -59,19 +60,37 @@ export class AsignatureFormComponent implements OnInit {
     this.sub.unsubscribe();
   }
 
-  
-  populateTestData(): void{
-    this.asignatureForm.patchValue({
-      name: 'Math',
-      description: "Math Descripcion"
-    })
+  formValidation():void{
+    const nameControl = this.asignatureForm.get('name');
+    const descriptionControl = this.asignatureForm.get('description');
+    
+    nameControl.valueChanges
+    .pipe(debounceTime(1000))
+    .subscribe(
+      () => this.setNameMessage(nameControl)
+    );
+
+    descriptionControl.valueChanges
+    .pipe(debounceTime(1000))
+    .subscribe(
+      () => this.setDescriptionMessage(descriptionControl)
+    );
+
   }
 
-  setMessage(c:AbstractControl):void{
+  setNameMessage(c:AbstractControl):void{
     this.nameMessage='';
     if((c.touched||c.dirty)&&c.errors){
       this.nameMessage = Object.keys(c.errors).map(
-        key=>this.nameMessage += this.validationMessages[key]).join(' ');      
+        key=>this.nameMessage += this.validationNameMessages[key]).join(' ');      
+    }
+  }
+
+  setDescriptionMessage(c:AbstractControl):void{
+    this.descriptionMessage='';
+    if((c.touched||c.dirty)&&c.errors){
+      this.descriptionMessage = Object.keys(c.errors).map(
+        key=>this.descriptionMessage += this.validationDescriptionMessages[key]).join(' ');      
     }
   }
 

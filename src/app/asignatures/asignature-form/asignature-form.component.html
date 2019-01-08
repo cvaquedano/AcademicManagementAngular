@@ -20,15 +20,9 @@
             <div class="form-group row mb-2">
                 <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
                 <div class="col-md-8">
-                    <input class="form-control" id="descriptionId" type="text" placeholder="Description (required)" formControlName='description' [ngClass]="{'is-invalid': (asignatureForm.get('description').touched || asignatureForm.get('description').dirty) && !asignatureForm.get('description').valid }"
-                    />
+                    <input class="form-control" id="descriptionId" type="text" placeholder="Description (required)" formControlName='description' [ngClass]="{'is-invalid': descriptionMessage }" />
                     <span class="invalid-feedback">
-            <span *ngIf="asignatureForm.get('description').errors?.required">
-              Please enter Description.
-            </span>
-                    <span *ngIf="asignatureForm.get('description').errors?.maxlength">
-              The last name must be less than 50 characters.
-            </span>
+           {{descriptionMessage}}
                     </span>
                 </div>
             </div>

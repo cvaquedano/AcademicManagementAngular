@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { StudentsComponent } from './student-list/students.component';
 import {  NumericIdGuard } from '../shared/guards/numericId.guard';
 import { StudentDetailComponent } from './Student-detail/student-detail.component';
+import { StudentFormGuard } from './student-form/student-form.guard';
+import { StudentFormComponent } from './student-form/student-form.component';
 
 @NgModule({
   declarations: [],
@@ -14,8 +16,8 @@ import { StudentDetailComponent } from './Student-detail/student-detail.componen
       component: StudentDetailComponent},
 
       {path:'students/:id/edit',
-      //canDeactivate:[AsignatureFormGuard],
-      component: StudentDetailComponent},
+      canDeactivate:[StudentFormGuard],
+      component: StudentFormComponent},
     ]
     ),
   ],

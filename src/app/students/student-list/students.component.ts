@@ -11,9 +11,7 @@ import { StudentService } from '../student.service';
 export class StudentsComponent implements OnInit {
 
   pageTitle:string='Listado De Alumnos';
-  imageWidth:number=50;
-    imageMargin: number = 2;
-    showImage:boolean=false;
+ 
 
   errorMessage:string='';
 
@@ -44,6 +42,7 @@ export class StudentsComponent implements OnInit {
     
     this.studentService.getStudents().subscribe(
       students=>{
+          
           this.students=students,
           this.filteredStudents=this.students
        },
@@ -52,8 +51,7 @@ export class StudentsComponent implements OnInit {
    
   }
 
-  toggleImage():void{
-      this.showImage=!this.showImage;    }
+
 
   onRatingClicked(message:string):void{
       this.pageTitle= 'Student List: ' + message;

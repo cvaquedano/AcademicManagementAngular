@@ -4,6 +4,7 @@ import { Asignature } from "./asignature";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError, of } from "rxjs";
 import { catchError, tap, map} from 'rxjs/operators'
+import { HandleError } from '../shared/handleError';
 
 @Injectable({
     providedIn:'root'
@@ -12,13 +13,13 @@ export class AsignatureService{
 
     private asignatureUrl='http://localhost:62988/api/asignature';
     
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,private handleError: HandleError){}
 
     getAsignatures():Observable<Asignature[]>{
        
         return this.http.get<Asignature[]>(this.asignatureUrl).pipe(
             tap(data=> console.log('All: ' + JSON.stringify(data))),
-            catchError(this.handleError)
+            catchError(this.handleError.handleError)
         );
     
     }
@@ -31,22 +32,10 @@ export class AsignatureService{
         return this.http.get<Asignature>(url)
           .pipe(
             tap(data => console.log('getAsignature: ' + JSON.stringify(data))),
-            catchError(this.handleError)
+            catchError(this.handleError.handleError)
           );
       }
-    private handleError(err:HttpErrorResponse){
-        let errorMessage='';
-        if (err.error instanceof ErrorEvent){
-            errorMessage=`An error ocurred: ${err.error.message}`;
-        } else{
-            errorMessage=`Server return code: ${err.status}, error message is: ${err.message}` ;
-            
-        }
-        console.error(errorMessage);
-        return throwError(errorMessage);
-    
-    }
-
+   
 
     private initializeAsignature(): Asignature {
         // Return an initialized object
@@ -64,7 +53,7 @@ export class AsignatureService{
             .pipe(
                 tap(()=>console.log('updateAsignature: ' + JSON.stringify(asignature))),
                 map(()=>asignature),
-                catchError(this.handleError)
+                catchError(this.handleError.handleError)
             );
       }
 
@@ -74,7 +63,7 @@ export class AsignatureService{
         return this.http.post<Asignature>(this.asignatureUrl, asignature, { headers: headers })
           .pipe(
             tap(data => console.log('createAsignature: ' + JSON.stringify(data))),
-            catchError(this.handleError)
+            catchError(this.handleError.handleError)
           );
       }
     
@@ -84,7 +73,7 @@ export class AsignatureService{
         return this.http.delete<Asignature>(url, { headers: headers })
           .pipe(
             tap(data => console.log('deleteAsignature: ' + id)),
-            catchError(this.handleError)
+            catchError(this.handleError.handleError)
           );
       }
 
