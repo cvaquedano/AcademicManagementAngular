@@ -29,7 +29,10 @@ export class StudentService{
          BirthDate:null,
          FirstName:null,
          LastName:null,
-         WriteWith:null
+         Gender:null,
+         IsRightHanded:null,
+         WriteWith:null,
+         CompleteName:null
         };
       }
 
@@ -49,7 +52,7 @@ export class StudentService{
         const url = `${this.studentUrl}/${id}`;
         return this.http.get<IStudent>(url)
           .pipe(
-            tap(data => console.log('getclients: ' + JSON.stringify(data))),
+            tap(data => console.log('getStudent: ' + JSON.stringify(data))),
             catchError(this.handleError.handleError)
           );
       }
@@ -57,6 +60,7 @@ export class StudentService{
       updateStudent(student:IStudent):Observable<IStudent>{
       
         const url = `${this.studentUrl}/${student.StudentId}`;
+        
         return this.http.put<IStudent>(url,student,{headers:this.headers})
             .pipe(
                 tap(()=>console.log('updateStudent: ' + JSON.stringify(student))),

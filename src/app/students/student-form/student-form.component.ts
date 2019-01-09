@@ -41,9 +41,12 @@ export class StudentFormComponent implements OnInit {
 
   ngOnInit() {
     this.studentForm = this.fb.group({
-      firstName:['',[Validators.required]],
-     
+      firstName:['',[Validators.required]],     
       lastName:['',[Validators.required]],
+      birthDate:[''],
+      gender:[true],
+      isRightHanded:[true]
+
     });
 
     this.formValidation();  
@@ -116,15 +119,19 @@ export class StudentFormComponent implements OnInit {
     }
 
     this.studentForm.patchValue({
-      name: this.student.FirstName,
-      lastName:this.student.LastName
+      firstName: this.student.FirstName,
+      lastName:this.student.LastName,
+      gender:this.student.Gender,
+      isRightHanded:this.student.IsRightHanded,
+      birthDate: this.student.BirthDate.replace('T00:00:00',''),
+     
 
 
     });
 
   }
 
-  saveAsignature(): void {
+  saveStudent(): void {
     if (this.studentForm.valid) {
       if (this.studentForm.dirty) {
         const p = { ...this.student, ...this.studentForm.value };
