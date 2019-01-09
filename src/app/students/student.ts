@@ -7,8 +7,5 @@ export class IStudent{
      }
      
      public readonly CompleteName:string=this.FirstName + '' +this.LastName;
-   
-
-
   
 }

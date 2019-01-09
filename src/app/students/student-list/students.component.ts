@@ -50,9 +50,6 @@ export class StudentsComponent implements OnInit {
   );
    
   }
-
-
-
   onRatingClicked(message:string):void{
       this.pageTitle= 'Student List: ' + message;
   }

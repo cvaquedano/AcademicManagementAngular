@@ -1,0 +1,51 @@
+<div class="card" *ngIf='teacherDetail'>
+    <div class="card-header">
+        {{pageTitle + ': ' + teacherDetail.FirstName + ' ' + teacherDetail.LastName}}
+    </div>
+
+    <div class="card-body" *ngIf="teacherDetail">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-3">Code:</div>
+                    <div class="col-md-6">{{teacherDetail.TeacherId}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Name:</div>
+                    <div class="col-md-6">{{teacherDetail.FirstName}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Last Name:</div>
+                    <div class="col-md-6">{{teacherDetail.LastName}}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">BirthDate:</div>
+                    <div class="col-md-6">{{teacherDetail.BirthDate|date}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">Age:</div>
+                    <div class="col-md-6">{{teacherDetail.Age}}</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <button class="btn btn-outline-secondary mr-3" style="width:80px" (click)="onBack()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+                <button class="btn btn-outline-primary" style="width:80px" [routerLink]="['/teachers', teacherDetail.TeacherId, 'edit']">
+          Edit
+        </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
+    </div>
+</div>

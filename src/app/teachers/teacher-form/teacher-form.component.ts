@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { Teacher } from '../teacher';
 import { Subscription } from 'rxjs';
-import {IStudent} from '../student'
 import { ActivatedRoute, Router } from '@angular/router';
-import { StudentService } from '../student.service';
+import { TeacherService } from '../teacher.service';
 import { debounceTime } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-student-form',
-  templateUrl: './student-form.component.html',
-  styleUrls: ['./student-form.component.css']
+  selector: 'app-teacher-form',
+  templateUrl: './teacher-form.component.html',
+  styleUrls: ['./teacher-form.component.css']
 })
-export class StudentFormComponent implements OnInit {
+export class TeacherFormComponent implements OnInit {
 
-  studentForm:FormGroup;
-  student = new IStudent() 
-  pageTitle = 'Student Edit';
+  teacherForm:FormGroup;
+  teacher = new Teacher() 
+  pageTitle = 'Teacher Edit';
   errorMessage: string;
 
   firstNameMessage:string;
@@ -25,22 +24,22 @@ export class StudentFormComponent implements OnInit {
   private sub:Subscription;
 
   private validationFirstNameMessages= {
-    required:'Please enter the student name.'
+    required:'Please enter the teacher name.'
    
   }
 
   private validationLastNameMessages= {
-    required:'Please enter the student last name.'
+    required:'Please enter the teacher last name.'
    
   }
   
   constructor(private fb:FormBuilder,
               private route:ActivatedRoute, 
               private router:Router,
-              private studentService: StudentService) { }
+              private teacherService: TeacherService) { }
 
   ngOnInit() {
-    this.studentForm = this.fb.group({
+    this.teacherForm = this.fb.group({
       firstName:['',[Validators.required]],     
       lastName:['',[Validators.required]],
       birthDate:[''],
@@ -54,7 +53,7 @@ export class StudentFormComponent implements OnInit {
     this.sub = this.route.paramMap.subscribe(
       params => {
         const id = +params.get('id');
-        this.getStudent(id);
+        this.getTeacher(id);
         
       }
     );
@@ -65,8 +64,8 @@ export class StudentFormComponent implements OnInit {
   }
 
   formValidation():void{
-    const firstNameControl = this.studentForm.get('firstName');
-    const lastNameControl = this.studentForm.get('lastName');
+    const firstNameControl = this.teacherForm.get('firstName');
+    const lastNameControl = this.teacherForm.get('lastName');
     
     firstNameControl.valueChanges
     .pipe(debounceTime(1000))
@@ -98,32 +97,32 @@ export class StudentFormComponent implements OnInit {
     }
   }
 
-  getStudent(id:number):void{
-    this.studentService.getStudent(id)
+  getTeacher(id:number):void{
+    this.teacherService.getTeacher(id)
     .subscribe(
-      (student:IStudent)=>this.displayStudent(student),
+      (teacher:Teacher)=>this.displayTeacher(teacher),
       (error:any)=> this.errorMessage=<any>error
     );
   }
 
-  displayStudent(student:IStudent):void{
-    if(this.studentForm){
-      this.studentForm.reset();
+  displayTeacher(teacher:Teacher):void{
+    if(this.teacherForm){
+      this.teacherForm.reset();
     }
-    this.student=student;
+    this.teacher=teacher;
 
-    if(this.student.StudentId===0){
-      this.pageTitle='Add IStudent';
+    if(this.teacher.TeacherId===0){
+      this.pageTitle='Add Teacher';
     }else{
-      this.pageTitle=`Edit IStudent: ${this.student.FirstName}`;
+      this.pageTitle=`Edit Teacher: ${this.teacher.FirstName}`;
     }
 
-    this.studentForm.patchValue({
-      firstName: this.student.FirstName,
-      lastName:this.student.LastName,
-      gender:this.student.Gender,
-      isRightHanded:this.student.IsRightHanded,
-      birthDate: this.student.BirthDate.replace('T00:00:00',''),
+    this.teacherForm.patchValue({
+      firstName: this.teacher.FirstName,
+      lastName:this.teacher.LastName,
+      gender:this.teacher.Gender,
+      
+      birthDate: this.teacher.BirthDate.replace('T00:00:00',''),
      
 
 
@@ -131,19 +130,19 @@ export class StudentFormComponent implements OnInit {
 
   }
 
-  saveStudent(): void {
-    if (this.studentForm.valid) {
-      if (this.studentForm.dirty) {
-        const p = { ...this.student, ...this.studentForm.value };
+  saveTeacher(): void {
+    if (this.teacherForm.valid) {
+      if (this.teacherForm.dirty) {
+        const p = { ...this.teacher, ...this.teacherForm.value };
 console.log(p);
-        if (p.StudentId === 0) {
-          this.studentService.createStudent(p)
+        if (p.TeacherId === 0) {
+          this.teacherService.createTeacher(p)
             .subscribe(
               () => this.onSaveComplete(),
               (error: any) => this.errorMessage = <any>error
             );
         } else {
-          this.studentService.updateStudent(p)
+          this.teacherService.updateTeacher(p)
             .subscribe(
               () => this.onSaveComplete(),
               (error: any) => this.errorMessage = <any>error
@@ -159,17 +158,17 @@ console.log(p);
 
   onSaveComplete(): void {
     // Reset the form to clear the flags
-    this.studentForm.reset();
-    this.router.navigate(['/students']);
+    this.teacherForm.reset();
+    this.router.navigate(['/teachers']);
   }
 
-  deleteStudent(): void {
-    if (this.student.StudentId === 0) {
+  deleteTeacher(): void {
+    if (this.teacher.TeacherId === 0) {
       // Don't delete, it was never saved.
       this.onSaveComplete();
     } else {
-      if (confirm(`Really delete the student: ${this.student.FirstName}?`)) {
-        this.studentService.deleteStudent(this.student.StudentId)
+      if (confirm(`Really delete the teacher: ${this.teacher.FirstName}?`)) {
+        this.teacherService.deleteTeacher(this.teacher.TeacherId)
           .subscribe(
             () => this.onSaveComplete(),
             (error: any) => this.errorMessage = <any>error

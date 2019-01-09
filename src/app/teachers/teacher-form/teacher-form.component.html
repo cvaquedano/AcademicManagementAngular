@@ -1,0 +1,83 @@
+<div class="card">
+    <div class="card-header">
+        Student Register
+    </div>
+
+    <div class="card-body">
+        <form novalidate (ngSubmit)="saveTeacher()" [formGroup]='teacherForm'>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="firstNameId">Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="firstNameId" type="text" placeholder="Name (required)" formControlName='firstName' [ngClass]="{'is-invalid': firstNameMessage }" />
+                    <span class="invalid-feedback">
+                      {{firstNameMessage}}
+        
+                  </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="lastNameId">Last Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="lastNameId" type="text" placeholder="Last Name (required)" formControlName='lastName' [ngClass]="{'is-invalid': lastNameMessage }" />
+                    <span class="invalid-feedback">
+         {{lastNameMessage}}
+                  </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="birthDateId">BirthDate</label>
+                <div class="col-md-8 ">
+                    <input class="form-control" type="date" name="birthDate" formControlName='birthDate'>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label pt-0">Gender</label>
+                <div class="col-md-8">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input"
+                                 type="radio"
+                                 [value]="true"
+                                 formControlName="gender"> Male
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                          <input class="form-check-input"
+                                 type="radio"
+                                 [value]="false"
+                                 formControlName="gender"> Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" type="submit" style="width:80px" [title]="teacherForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'" [disabled]="!teacherForm.valid">
+          Save
+        </button>
+                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits" [routerLink]="['/teachers']">
+              Cancel
+          </button>
+                    <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this Teacher" (click)="deleteTeacher()">
+          Delete
+        </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<br>Dirty: {{ teacherForm.dirty }}
+<br>Touched: {{ teacherForm.touched }}
+<br>Valid: {{ teacherForm.valid }}
+<br>Value: {{ teacherForm.value | json }}

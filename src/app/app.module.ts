@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StudentModule } from './students/student.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AsignatureModule } from './asignatures/asignature.module';
+import { TeacherModule } from './teachers/teacher.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AsignatureModule } from './asignatures/asignature.module';
    
     StudentModule,
     AsignatureModule,
+    TeacherModule,
 
     AppRoutingModule
     
