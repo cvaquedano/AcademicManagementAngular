@@ -1,6 +1,9 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy,  } from '@angular/core';
 import { IStudent } from '../student';
 import { StudentService } from '../student.service';
+import { StudentFilterComponent } from '../student-filter/student-filter.component';
+import { StudentFilterParameterService } from '../student-filter/student-filter-parameter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'am-students',
@@ -8,49 +11,52 @@ import { StudentService } from '../student.service';
   styleUrls:['./students.component.css']
  
 })
-export class StudentsComponent implements OnInit {
+export class StudentsComponent implements OnInit, OnDestroy {
+   
 
   pageTitle:string='Listado De Alumnos';
- 
-
   errorMessage:string='';
 
-   
-  private _listFilter: string;
-  public get listFilter(): string {
-      return this._listFilter;
-  }
-  public set listFilter(value: string) {
-      this._listFilter = value;
-      this.filteredStudents=this.listFilter?this.performFilter(this.listFilter):this.students;
-
-  }
+  incluideDetail:boolean = true;
+  @ViewChild(StudentFilterComponent) filterComponent : StudentFilterComponent;
+  
   filteredStudents:IStudent[];
   students:IStudent[] = [ ];
 
-  constructor(private studentService:StudentService){
+  sub:Subscription;
+
+  constructor(private studentService:StudentService, private studentFilterParameterService:StudentFilterParameterService){
   
  
 }
-  performFilter(filterBy: string): IStudent[] {
-      filterBy=filterBy.toLocaleLowerCase();
 
-      return this.students.filter((student:IStudent)=>
-      student.FirstName.toLocaleLowerCase().indexOf(filterBy)!==-1);
-  }
+    ngOnDestroy(): void {
+        this.sub.unsubscribe();
+    }
   ngOnInit(): void {
     
-    this.studentService.getStudents().subscribe(
+    this.sub= this.studentService.getStudents().subscribe(
       students=>{
           
-          this.students=students,
-          this.filteredStudents=this.students
+          this.students=students,          
+          this.filterComponent.listFilter=this.studentFilterParameterService.filterBy;
        },
       error=> this.errorMessage=<any>error
-  );
-   
+  );   
   }
-  onRatingClicked(message:string):void{
-      this.pageTitle= 'Student List: ' + message;
-  }
+
+  onValueChange(value:string):void{
+    this.studentFilterParameterService.filterBy=value;
+    this.performFilter(value);
+}
+
+performFilter(filterBy?: string): void {   
+
+    if (filterBy) {
+        this.filteredStudents = this.students.filter((student:IStudent) =>
+        student.FirstName.toLocaleLowerCase().indexOf(filterBy.toLocaleLowerCase()) !== -1);
+    } else {
+        this.filteredStudents = this.students;
+    }
+}
 }

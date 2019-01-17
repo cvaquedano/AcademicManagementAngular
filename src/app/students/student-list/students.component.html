@@ -3,11 +3,11 @@
         {{pageTitle}}
     </div>
     <div class='card-body'>
-        <div class='row'>
-            <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
-                <input type='text' [(ngModel)]='listFilter' />
-            </div>
+        <div class="row">
+            <app-student-filter #filterCriteria class="col-md-10" [displayDetail]="incluideDetail" [hitCount]="filteredStudents?.length" (valueChange)='onValueChange($event)'>
+
+            </app-student-filter>
+
         </div>
 
         <div class='table-responsive'>
