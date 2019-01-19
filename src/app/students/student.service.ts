@@ -1,8 +1,8 @@
 
 import { Injectable } from "@angular/core";
 import { IStudent } from "./student";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { Observable, throwError, of } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable, of } from "rxjs";
 import { catchError, tap, map} from 'rxjs/operators'
 import { HandleError } from '../shared/handleError';
 
@@ -14,29 +14,17 @@ export class StudentService{
     private studentUrl='http://localhost:62988/api/student';
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    
+    private students: IStudent[];
+    currentStudent: IStudent;
+
     constructor(private http:HttpClient,  private handleError: HandleError){}
 
-   
-    
-
-
-    private initializeClient(): IStudent {
-        // Return an initialized object
-        return {
-         StudentId:0,
-         Age:0,
-         BirthDate:null,
-         FirstName:null,
-         LastName:null,
-         Gender:null,
-         IsRightHanded:null,
-         WriteWith:null,
-         CompleteName:null
-        };
-      }
 
       getStudents():Observable<IStudent[]>{
+
+        if (this.students) {
+          return of(this.students);
+      }
        
         return this.http.get<IStudent[]>(this.studentUrl).pipe(
             tap(data=> console.log('All: ' + JSON.stringify(data))),
@@ -49,6 +37,12 @@ export class StudentService{
         if (id === 0) {
           return of(this.initializeClient());
         }
+        if (this.students) {
+          const foundItem = this.students.find(item => item.StudentId === id);
+          if (foundItem) {
+              return of(foundItem);
+          }
+      }
         const url = `${this.studentUrl}/${id}`;
         return this.http.get<IStudent>(url)
           .pipe(
@@ -75,6 +69,10 @@ export class StudentService{
         return this.http.post<IStudent>(this.studentUrl, student, { headers: this.headers })
           .pipe(
             tap(data => console.log('createStudent: ' + JSON.stringify(data))),
+            tap(data => {
+              this.students.push(data);
+              this.currentStudent = data;
+          }),
             catchError(this.handleError.handleError)
           );
       }
@@ -85,8 +83,31 @@ export class StudentService{
         return this.http.delete<IStudent>(url, { headers: this.headers })
           .pipe(
             tap(data => console.log('deleteStudent: ' + id)),
+            tap(data => {
+              const foundIndex = this.students.findIndex(item => item.StudentId === id);
+              if (foundIndex > -1) {
+                  this.students.splice(foundIndex, 1);
+                  this.currentStudent = null;
+              }
+          }),
             catchError(this.handleError.handleError)
           );
       }
+
+      
+    private initializeClient(): IStudent {
+      // Return an initialized object
+      return {
+       StudentId:0,
+       Age:0,
+       BirthDate:null,
+       FirstName:null,
+       LastName:null,
+       Gender:null,
+       IsRightHanded:null,
+       WriteWith:null,
+       CompleteName:null
+      };
+    }
 
 }
