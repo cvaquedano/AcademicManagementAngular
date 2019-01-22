@@ -1,0 +1,38 @@
+<div class='card' *ngIf='course'>
+    <div class='card-header'>
+        {{pageTitle}}
+    </div>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='course.CourseDetailDto.length'>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Asignatura</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let asignature of course.CourseDetailDto'>
+
+                        <td> {{asignature.AsignatureId}} </td>
+                        <td>{{asignature.AsignatureName }}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer">
+
+        <button class="btn btn-outline-primary btn-sm" style="height:35px" [routerLink]="['/asignatures/0', 'edit']">
+          Edit Asignatures
+        </button>
+    </div>
+
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+</div>

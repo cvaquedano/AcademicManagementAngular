@@ -14,13 +14,8 @@ export class TeacherService{
 
     private teacherUrl='http://localhost:62988/api/teacher';
     private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
     
     constructor(private http:HttpClient,  private handleError: HandleError){}
-
-   
-    
-
 
     private initializeClient(): Teacher {
         // Return an initialized object

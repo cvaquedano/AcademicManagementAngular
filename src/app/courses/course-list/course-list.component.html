@@ -1,0 +1,37 @@
+<div class="row">
+    <div class='panel panel-primary' *ngIf='courses?.length'>
+        <div class='panel-heading'>
+            {{pageTitle}}
+        </div>
+
+        <div class='panel-body'>
+            <div class='list-group'>
+                <button type='button' class='list-group-item' *ngFor='let course of courses' [ngClass]="{'active': course?.CourseId === selectedCourse?.CourseId}" (click)='onSelected(course)'>
+            {{ course.Name }} ({{ course.Description }})
+          </button>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <button class="btn btn-outline-secondary mr-3" style="width:80px; height:35px" [routerLink]="['/Welcome']">
+                        <i class="fa fa-chevron-left"></i> Back
+                      </button>
+            <button class="btn btn-outline-primary btn-sm mr-1" style="height:35px" [routerLink]="['/courses/0', 'edit']">
+               
+                Add Course
+              </button>
+            <button class="btn btn-outline-primary btn-sm" [disabled]='!canEdit' style="height:35px" [routerLink]="['/courses/', selectedCourse?.CourseId , 'edit']">
+                Edit Course
+              </button>
+        </div>
+
+    </div>
+
+    <div class="col-md-8">
+        <app-course-detail></app-course-detail>
+    </div>
+</div>
+
+
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+</div>

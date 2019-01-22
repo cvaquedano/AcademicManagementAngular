@@ -7,6 +7,7 @@ import { StudentModule } from './students/student.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AsignatureModule } from './asignatures/asignature.module';
 import { TeacherModule } from './teachers/teacher.module';
+import { CourseModule } from './courses/course.module';
 
 @NgModule({
   declarations: [
@@ -16,17 +17,15 @@ import { TeacherModule } from './teachers/teacher.module';
   ],
   
   imports: [
-    BrowserModule,
-    
+    BrowserModule,    
     HttpClientModule,
-   
+
     StudentModule,
     AsignatureModule,
     TeacherModule,
+    CourseModule,
 
-    AppRoutingModule
-    
-  
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
