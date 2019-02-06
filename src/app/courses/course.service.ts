@@ -24,7 +24,8 @@ constructor(private http:HttpClient,  private handleError: HandleError){}
   }
    
     return this.http.get<ICourse[]>(this.courseUrl).pipe(
-        tap(data=> console.log('All: ' + JSON.stringify(data))),
+    
+      tap(data=> this.courses=data),
         catchError(this.handleError.handleError)
     );
 
@@ -49,13 +50,20 @@ getCourse(id: number): Observable<ICourse> {
   }
 
   updateCourse(course:ICourse):Observable<ICourse>{
-  
+    
     const url = `${this.courseUrl}/${course.CourseId}`;
+
+    console.log('entro:'+JSON.stringify(course)+url);
 
     return this.http.put<ICourse>(url,course,{headers:this.headers})
         .pipe(
             tap(()=>console.log('updateCourse: ' + JSON.stringify(course))),
-            map(()=>course),
+            tap(data=>{
+              this.currentCourse.Name=data.Name,
+              this.currentCourse.Description=data.Description,
+              this.currentCourse.CourseDetailDto=data.CourseDetailDto
+            }),
+            
             catchError(this.handleError.handleError)
         );
   }
@@ -63,6 +71,7 @@ getCourse(id: number): Observable<ICourse> {
   createCourse(course:ICourse): Observable<ICourse> {
    
     course.CourseId = null;
+    console.log(course);
     return this.http.post<ICourse>(this.courseUrl, course, { headers: this.headers })
       .pipe(
         tap(data => console.log('createCourse: ' + JSON.stringify(data))),

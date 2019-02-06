@@ -27,7 +27,7 @@ export class StudentService{
       }
        
         return this.http.get<IStudent[]>(this.studentUrl).pipe(
-            tap(data=> console.log('All: ' + JSON.stringify(data))),
+            tap(data=> this.students=data),
             catchError(this.handleError.handleError)
         );
     
@@ -59,7 +59,8 @@ export class StudentService{
             .pipe(
                 tap(()=>console.log('updateStudent: ' + JSON.stringify(student))),
                 map(()=>student),
-                catchError(this.handleError.handleError)
+                catchError(this.handleError.handleError),
+              
             );
       }
 
@@ -70,7 +71,9 @@ export class StudentService{
           .pipe(
             tap(data => console.log('createStudent: ' + JSON.stringify(data))),
             tap(data => {
+              console.log(this.students)
               this.students.push(data);
+              console.log(this.students)
               this.currentStudent = data;
           }),
             catchError(this.handleError.handleError)

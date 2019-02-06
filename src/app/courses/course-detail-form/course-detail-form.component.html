@@ -1,0 +1,66 @@
+<div style="text-align:left;">
+
+    <form novalidate [formGroup]='courseDetailForm'>
+        <div class="row">
+            <label>Asignatures</label>
+            <mat-form-field class="container">
+                <!-- ADD AN INPUT BOX OF TYPE TEXT AND LINK IT TO THE AUTO COMPLETE PANEL. -->
+                <input type="text" #newAsignature (keyup.enter)="addAsignature()" style="border:1px solid #000000" matInput formControlName='userInput' [matAutocomplete]="auto">
+
+                <!-- CREATE AUTO COMPLETE PANEL WITH OPTIONS. -->
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+
+                    <mat-option *ngFor=" let asignature of filteredAsignatures " [value]="asignature ">
+                        {{ asignature.Name }}
+                    </mat-option>
+
+                </mat-autocomplete>
+
+            </mat-form-field>
+
+            <button class="btn btn-primary ml-2 " type="button " style="width:80px" (click)='addAsignature()'>
+                    Add
+                  </button>
+        </div>
+        <div class="table-responsive ">
+            <table class='table' *ngIf='courseDetails && courseDetails.length'>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Asignatura</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let courseDetail of courseDetails'>
+
+
+                        <td>{{courseDetail.AsignatureId}}</td>
+                        <td>{{courseDetail.AsignatureName }}</td>
+
+                        <td>
+                            <button class="btn btn-outline-warning " style="width:80px " type="button " title="Delete this Asignature " (click)="deleteAsignature(courseDetail.CourseDetailId) ">
+                                        Delete
+                                        </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card-footer ">
+            <div class=" ">
+                <button class="btn btn-primary mr-3 " (click)="saveAsignature()" type="submit " style="width:80px " [title]="aChangeWasMade ? 'Save your entered data' : 'Disabled until the form data is valid' " [disabled]="!aChangeWasMade ">
+            Save
+          </button>
+                <button class="btn btn-outline-secondary mr-3 " style="width:80px; " type="button " title="Cancel your edits " [routerLink]="[ '/courses'] ">
+                Cancel
+            </button>
+
+            </div>
+        </div>
+
+
+    </form>
+
+</div>

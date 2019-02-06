@@ -38,7 +38,7 @@ export class AsignatureListComponent implements OnInit {
   }
   ngOnInit(): void {
     
-    this.asignatureService.getAsignatures().subscribe(
+    this.asignatureService.getAsignatures(null).subscribe(
       (asignatures: Asignature[])=>{
           this.asignatures=asignatures,
           this.filteredAsignatures=this.asignatures

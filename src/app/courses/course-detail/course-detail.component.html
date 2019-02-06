@@ -4,7 +4,7 @@
     </div>
     <div class='card-body'>
         <div class='table-responsive'>
-            <table class='table' *ngIf='course.CourseDetailDto.length'>
+            <table class='table' *ngIf='course.CourseDetailDto?.length'>
                 <thead>
                     <tr>
                         <th>Codigo</th>
@@ -27,7 +27,7 @@
 
     <div class="card-footer">
 
-        <button class="btn btn-outline-primary btn-sm" style="height:35px" [routerLink]="['/asignatures/0', 'edit']">
+        <button class="btn btn-outline-primary btn-sm" style="height:35px" [routerLink]="['/courses/detail/', course.CourseId, 'edit']">
           Edit Asignatures
         </button>
     </div>

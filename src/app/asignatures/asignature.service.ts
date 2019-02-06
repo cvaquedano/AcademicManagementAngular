@@ -1,10 +1,11 @@
 
 import { Injectable } from "@angular/core";
 import { Asignature } from "./asignature";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, throwError, of } from "rxjs";
 import { catchError, tap, map} from 'rxjs/operators'
 import { HandleError } from '../shared/handleError';
+import { queryDef } from '@angular/core/src/view';
 
 @Injectable({
     providedIn:'root'
@@ -15,9 +16,23 @@ export class AsignatureService{
     
     constructor(private http:HttpClient,private handleError: HandleError){}
 
-    getAsignatures():Observable<Asignature[]>{
-       
+
+    getAsignatures(query:string):Observable<Asignature[]>{
+      
+
+
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      headers.append('query',query);
+      let params = new HttpParams().set("query",query)
+
+      if (!query){
         return this.http.get<Asignature[]>(this.asignatureUrl).pipe(
+          tap(data=> console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError.handleError)
+      );
+      }
+       
+        return this.http.get<Asignature[]>(this.asignatureUrl,{headers:headers,params:params}).pipe(
             tap(data=> console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError.handleError)
         );

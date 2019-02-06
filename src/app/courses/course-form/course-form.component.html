@@ -1,3 +1,48 @@
-<p>
-  course-form works!
-</p>
+<div class="card">
+    <div class="card-header">
+        Course Register
+    </div>
+
+    <div class="card-body">
+        <form novalidate (ngSubmit)="saveCourse()" [formGroup]='courseForm'>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="NameId">Name</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="NameId" type="text" placeholder="Name (required)" formControlName='name' [ngClass]="{'is-invalid': nameMessage }" />
+                    <span class="invalid-feedback">
+                      {{nameMessage}}
+        
+                  </span>
+                </div>
+            </div>
+
+            <div class="form-group row mb-2">
+                <label class="col-md-2 col-form-label" for="descriptionId">Description</label>
+                <div class="col-md-8">
+                    <input class="form-control" id="descriptionId" type="text" placeholder="Description (required)" formControlName='description' [ngClass]="{'is-invalid': descriptionMessage }" />
+                    <span class="invalid-feedback">
+         {{descriptionMessage}}
+                  </span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row mb-2">
+                <div class="offset-md-2 col-md-4">
+                    <button class="btn btn-primary mr-3" type="submit" style="width:80px" [title]="courseForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'" [disabled]="!courseForm.valid">
+          Save
+        </button>
+                    <button class="btn btn-outline-secondary mr-3" style="width:80px;" type="button" title="Cancel your edits" [routerLink]="['/courses']">
+              Cancel
+          </button>
+                    <button class="btn btn-outline-warning" style="width:80px" type="button" title="Delete this Course" (click)="deleteCourse()">
+          Delete
+        </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
