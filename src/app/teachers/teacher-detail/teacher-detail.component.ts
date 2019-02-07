@@ -20,11 +20,18 @@ export class TeacherDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getTeacher(id);
-    }
+    //const param = this.route.snapshot.paramMap.get('id');
+
+    this.route.paramMap.subscribe(
+      params=>{
+        if (params) {
+          const id = +params;
+          this.getTeacher(id);
+        }
+      }
+    );
+
+   
   }
 
   getTeacher(id: number) {
