@@ -21,7 +21,6 @@ export class TeacherDetailComponent implements OnInit {
 
   ngOnInit() {
     //const param = this.route.snapshot.paramMap.get('id');
-
     this.route.paramMap.subscribe(
       params=>{
         if (params) {
