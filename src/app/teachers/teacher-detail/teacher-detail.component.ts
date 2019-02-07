@@ -1,18 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Teacher } from '../teacher';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TeacherService } from '../teacher.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-teacher-detail',
   templateUrl: './teacher-detail.component.html',
   styleUrls: ['./teacher-detail.component.css']
 })
-export class TeacherDetailComponent implements OnInit {
+export class TeacherDetailComponent implements OnInit,OnDestroy {
+
 
   pageTitle:string ='Teacher Detail'
   teacherDetail:Teacher| undefined;
   errorMessage = '';
+
+  sub:Subscription;
     
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -21,17 +25,19 @@ export class TeacherDetailComponent implements OnInit {
 
   ngOnInit() {
     //const param = this.route.snapshot.paramMap.get('id');
-    this.route.paramMap.subscribe(
+    this.sub= this.route.paramMap.subscribe(
       params=>{
         if (params) {
-          const id = +params;
+          const id = +params.get('id');
           this.getTeacher(id);
         }
       }
     );
-
-   
   }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  } 
 
   getTeacher(id: number) {
     this.teacherService.getTeacher(id).subscribe(
@@ -41,7 +47,8 @@ export class TeacherDetailComponent implements OnInit {
   
 
   onBack(): void{
-    this.router.navigate(['/teachers']);
+    this.router.navigate(['/teachers'],{queryParamsHandling:'preserve'});
+    
   }
   
 }

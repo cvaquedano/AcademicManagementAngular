@@ -26,7 +26,7 @@
                     <tr *ngFor='let teacher of filteredTeachers'>
 
                         <td>
-                            <a [routerLink]="['/teachers', teacher.TeacherId]">
+                            <a [routerLink]="['/teachers', teacher.TeacherId]" [queryParams]={filterBy:listFilter}>
                                 {{teacher.TeacherId}}
                             </a>
 
