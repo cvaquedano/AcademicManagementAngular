@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Asignature } from '../asignature';
+import { Asignature, AsignatureResolved } from '../asignature';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsignatureService } from '../asignature.service';
 
@@ -20,11 +20,23 @@ export class AsignatureDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getAsignature(id);
-    }
+    // const param = this.route.snapshot.paramMap.get('id');
+    // if (param) {
+    //   const id = +param;
+    //   this.getAsignature(id);
+    //}
+
+    //Prefetching Data
+    // const resolvedData: AsignatureResolved = this.route.snapshot.data['resolvedData'];
+    // this.errorMessage = resolvedData.error;    
+    // this.asignatureDetail=resolvedData.asignature;
+
+    //Prefetching Data using observable
+    this.route.data.subscribe(data=>{
+      const resolvedData: AsignatureResolved = data['resolvedData'];
+      this.errorMessage = resolvedData.error;    
+      this.asignatureDetail=resolvedData.asignature;
+    });
   }
 
   getAsignature(id: number) {
