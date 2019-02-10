@@ -11,20 +11,24 @@ import { AsignatureResolver } from './asignature-resolver.service';
   declarations: [],
   imports: [
     RouterModule.forChild([
-      {path:'asignatures',component: AsignatureListComponent},
-     
-      {path:'asignatures/:id',
-      //canActivate:[NumericIdGuard],
-      component: AsignatureDetailComponent,
-      resolve:{ resolvedData:AsignatureResolver }
+      {
+        path:'asignatures',
+       
+        children:[
+          {path:'',component:  AsignatureListComponent,},
+          {path:':id',
+          //canActivate:[NumericIdGuard],
+          component: AsignatureDetailComponent,
+          resolve:{ resolvedData:AsignatureResolver }
+        
+        },
     
-    },
-
-      {path:'asignatures/:id/edit',
-      canDeactivate:[AsignatureFormGuard],
-      component: AsignatureFormComponent},
+          {path:':id/edit',
+          canDeactivate:[AsignatureFormGuard],
+          component: AsignatureFormComponent},
+        ]      
+      },
     ]
-
     ),
   ],
   exports:[RouterModule]
