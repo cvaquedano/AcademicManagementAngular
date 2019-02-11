@@ -5,11 +5,14 @@ import { MessageService } from './messages/message.service';
 
 import { Component } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError, NavigationCancel } from '@angular/router';
+import { slideInAnimation } from './app.animation';
 
 
 @Component({
   selector: 'am-root',
   templateUrl: './app.component.html',
+
+  animations:[slideInAnimation]
  
 })
 export class AppComponent {

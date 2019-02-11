@@ -9,6 +9,7 @@ import { AsignatureModule } from './asignatures/asignature.module';
 import { TeacherModule } from './teachers/teacher.module';
 import { CourseModule } from './courses/course.module';
 import { UserModule } from './user/user.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserModule } from './user/user.module';
   ],
   
   imports: [
-    BrowserModule,    
+    BrowserModule, 
+    BrowserAnimationsModule,   
     HttpClientModule,
 
     StudentModule,
