@@ -8,3 +8,8 @@ export interface AsignatureResolved{
     asignature:Asignature;
     error?:any;
 }
+
+export interface AsignatureListResolved{
+    asignature:Asignature[];
+    error?:any;
+}
