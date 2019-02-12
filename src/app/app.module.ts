@@ -10,6 +10,7 @@ import { TeacherModule } from './teachers/teacher.module';
 import { CourseModule } from './courses/course.module';
 import { UserModule } from './user/user.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessageModule } from './messages/message.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CourseModule,
 
     UserModule,
+    MessageModule,
     AppRoutingModule,
   ],
   providers: [],

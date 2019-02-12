@@ -7,6 +7,7 @@ import { NumericIdGuard } from '../shared/guards/numericId.guard';
 import { AsignatureFormGuard } from './asignature-form/asignature-form.guard';
 import { AsignatureResolver } from './asignature-resolver.service';
 import { AsignatureListResolver } from './asignature-list-resolver.service';
+import { AuthGuard } from '../user/auth.guard';
 
 @NgModule({
   declarations: [],
@@ -14,6 +15,7 @@ import { AsignatureListResolver } from './asignature-list-resolver.service';
     RouterModule.forChild([
       {
         path:'asignatures',
+        canActivate:[AuthGuard],
         resolve:{ resolvedData:AsignatureListResolver },
        
         children:[

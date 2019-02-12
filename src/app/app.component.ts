@@ -11,7 +11,7 @@ import { slideInAnimation } from './app.animation';
 @Component({
   selector: 'am-root',
   templateUrl: './app.component.html',
-
+  styleUrls: ['./app.component.css'],
   animations:[slideInAnimation]
  
 })
