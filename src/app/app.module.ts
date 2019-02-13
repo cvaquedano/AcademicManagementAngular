@@ -27,6 +27,7 @@ import { MessageModule } from './messages/message.module';
     StudentModule,
 
     //configurate asignature module to use lazy loading
+    //rounting must by grouping
     //AsignatureModule,
     TeacherModule,
     CourseModule,
