@@ -5,7 +5,6 @@ import { debounceTime } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AsignatureService } from '../asignature.service';
 import { Subscription, Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-asignature-form',

@@ -10,29 +10,30 @@ import { CourseDetailFormComponent } from './course-detail-form/course-detail-fo
 import { CourseFormGuard } from './course-form/course-form.guard';
 import { CourseDetailFormGuard } from './course-detail-form/course-detail-form.guard';
 import { AutocompleteSimpleExampleComponent } from './autocomplete-simple-example/autocomplete-simple-example.component';
+import { AuthGuard } from '../user/auth.guard';
 
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild([
-     {path:'courses',component: CourseListComponent},
-    //   {path:'courses/:id',
-    //   canActivate:[NumericIdGuard],
-    //   component: TeacherDetailComponent},
+     {
+       path:'courses',
+       canActivate:[AuthGuard],
 
-    //{path:'courses',component: AutocompleteSimpleExampleComponent},
-      
-      {path:'courses/:id/edit',
-      canDeactivate:[CourseFormGuard],
-      component: CourseFormComponent},
-    
-      {path:'courses/detail/:id/edit',
-      canDeactivate:[CourseDetailFormGuard],
-      component: CourseDetailFormComponent},
-    ]
-    ),
+       children:[
+         {  path:'',component: CourseListComponent},
+         {  path:':id/edit',
+            canDeactivate:[CourseFormGuard],
+            component: CourseFormComponent },
+         {  path:'detail/:id/edit',
+            canDeactivate:[CourseDetailFormGuard],
+            component: CourseDetailFormComponent},
+       ]
+      },
+    ]),
   ],
+   
   exports:[RouterModule]
 })
 export class CourseRoutingModule { }

@@ -17,9 +17,9 @@ export class NumericIdGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     let id = +next.url[1].path;
     let url =next.url[0].path
-    if(isNaN(id)|| id<1){
+    if(isNaN(id)|| id<0){
 
-      alert('Invalid Id');
+      alert('Invalid Id ' + id);
       this.router.navigate(['/'+url]);
       return false;
     }
