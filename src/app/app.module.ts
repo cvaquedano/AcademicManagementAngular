@@ -25,7 +25,9 @@ import { MessageModule } from './messages/message.module';
     HttpClientModule,
 
     StudentModule,
-    AsignatureModule,
+
+    //configurate asignature module to use lazy loading
+    //AsignatureModule,
     TeacherModule,
     CourseModule,
 

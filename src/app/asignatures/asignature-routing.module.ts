@@ -13,12 +13,12 @@ import { AuthGuard } from '../user/auth.guard';
   declarations: [],
   imports: [
     RouterModule.forChild([
-      {
-        path:'asignatures',
-        canActivate:[AuthGuard],
-        resolve:{ resolvedData:AsignatureListResolver },
+      // {
+      //   path:'asignatures',
+      //   canActivate:[AuthGuard],
+      //   resolve:{ resolvedData:AsignatureListResolver },
        
-        children:[
+      //   children:[
           {path:'',component:  AsignatureListComponent,},
           {path:':id',
           //canActivate:[NumericIdGuard],
@@ -30,8 +30,8 @@ import { AuthGuard } from '../user/auth.guard';
           {path:':id/edit',
           canDeactivate:[AsignatureFormGuard],
           component: AsignatureFormComponent},
-        ]      
-      },
+      //   ]      
+      // },
     ]
     ),
   ],
