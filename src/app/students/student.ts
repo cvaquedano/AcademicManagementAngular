@@ -9,3 +9,8 @@ export class IStudent{
      public readonly CompleteName:string=this.FirstName + '' +this.LastName;
   
 }
+
+export interface AsignatureListResolved{
+    students:IStudent[];
+    error?:any;
+}

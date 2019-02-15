@@ -18,6 +18,7 @@ import { SelectiveStrategy } from './selective-strategy.service';
         resolve:{ resolvedData:AsignatureListResolver } ,
         loadChildren:'./asignatures/asignature.module#AsignatureModule'
       },
+      
       {path:'',redirectTo: 'welcome',pathMatch:'full'},
       {path:'**',redirectTo: 'welcome',pathMatch:'full'}
 

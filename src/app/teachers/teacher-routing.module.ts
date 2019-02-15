@@ -12,16 +12,21 @@ import { TeacherFormGuard } from './teacher-form/teacher-form.guard';
   declarations: [],
   imports: [
     RouterModule.forChild([
-      {path:'teachers',component: TeacherListComponent},
-      {path:'teachers/:id',
-      canActivate:[NumericIdGuard],
-      component: TeacherDetailComponent},
-
-      {path:'teachers/:id/edit',
-      canDeactivate:[TeacherFormGuard],
-      component: TeacherFormComponent},
-    ]
-    ),
+      {
+        path:'teachers',
+       children:[
+         {path:'', component: TeacherListComponent},
+        {path:':id',
+        canActivate:[NumericIdGuard],
+        component: TeacherDetailComponent},
+  
+        {path:':id/edit',
+        canDeactivate:[TeacherFormGuard],
+        component: TeacherFormComponent},
+       ]
+      },
+    
+    ]),
   ],
   exports:[RouterModule]
 })

@@ -10,7 +10,9 @@ import { StudentFilterComponent } from './student-filter/student-filter.componen
 @NgModule({
   declarations: [ 
     StudentsComponent,   
-    StudentDetailComponent, StudentFormComponent, StudentFilterComponent,
+    StudentDetailComponent, 
+    StudentFormComponent, 
+    StudentFilterComponent,
   ],
   imports: [
     ReactiveFormsModule,   

@@ -9,7 +9,6 @@ import { CourseFormComponent } from './course-form/course-form.component';
 import { CourseDetailFormComponent } from './course-detail-form/course-detail-form.component';
 import { CourseFormGuard } from './course-form/course-form.guard';
 import { CourseDetailFormGuard } from './course-detail-form/course-detail-form.guard';
-import { AutocompleteSimpleExampleComponent } from './autocomplete-simple-example/autocomplete-simple-example.component';
 import { AuthGuard } from '../user/auth.guard';
 
 

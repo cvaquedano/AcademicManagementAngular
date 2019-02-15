@@ -10,16 +10,24 @@ import { StudentFormComponent } from './student-form/student-form.component';
   declarations: [],
   imports: [
     RouterModule.forChild([
-      {path:'students',component: StudentsComponent},
-      {path:'students/:id',
-      canActivate:[NumericIdGuard],
-      component: StudentDetailComponent},
+      {
+        path:'students',       
+        children:[
+          {
+            path:'',
+            component: StudentsComponent,
 
-      {path:'students/:id/edit',
-      canDeactivate:[StudentFormGuard],
-      component: StudentFormComponent},
-    ]
-    ),
+          },
+          {path:':id',
+          //canActivate:[NumericIdGuard],
+          component: StudentDetailComponent},
+    
+          {path:':id/edit',
+          canDeactivate:[StudentFormGuard],
+          component: StudentFormComponent}
+        ]
+      }
+    ]),
   ],
   exports:[RouterModule]
 })
