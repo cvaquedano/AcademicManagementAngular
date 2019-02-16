@@ -10,7 +10,7 @@ export class IStudent{
   
 }
 
-export interface AsignatureListResolved{
+export interface StudentListResolved{
     students:IStudent[];
     error?:any;
 }

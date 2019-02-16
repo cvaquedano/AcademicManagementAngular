@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ICourse } from '../course';
+import { ICourse, CourseListResolved } from '../course';
 import { CourseService } from '../course.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-course-list',
@@ -16,7 +18,7 @@ export class CourseListComponent implements OnInit, OnDestroy {
   sub:Subscription;
   canEdit:boolean=false;
 
-  constructor(private courseService:CourseService) { }
+  constructor(private courseService:CourseService,private route: ActivatedRoute) { }
 
   get selectedCourse(): ICourse | null { 
     if(!this.canEdit)
@@ -27,14 +29,13 @@ export class CourseListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log(this.canEdit);
-    this.sub= this.courseService.getCourses().subscribe(
-      courses=>{
-          
-          this.courses=courses        
-          //this.filterComponent.listFilter=this.studentFilterParameterService.filterBy;
-       },
-      error=> this.errorMessage=<any>error
-  );   
+    this.sub=  this.route.data.subscribe(data=>{
+      const resolvedData: CourseListResolved = data['resolvedData'];
+      this.errorMessage = resolvedData.error;    
+      this.courses=resolvedData.courses;
+      //this.filteredAsignatures=this.asignatures
+    });
+
   }
 
   ngOnDestroy(): void {

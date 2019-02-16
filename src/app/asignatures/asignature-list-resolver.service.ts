@@ -18,7 +18,7 @@ export class AsignatureListResolver implements Resolve<AsignatureListResolved>{
 
        
 
-        return this.asginatureService.getAsignatures("")
+        return this.asginatureService.getAsignatures(null)
         .pipe(
             map(asignature=>({asignature:asignature})),
             catchError(error=>{

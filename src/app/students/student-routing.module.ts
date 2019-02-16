@@ -5,18 +5,21 @@ import {  NumericIdGuard } from '../shared/guards/numericId.guard';
 import { StudentDetailComponent } from './Student-detail/student-detail.component';
 import { StudentFormGuard } from './student-form/student-form.guard';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { StudentListResolver } from './student-list-resolver.service';
+
 
 @NgModule({
   declarations: [],
   imports: [
     RouterModule.forChild([
       {
-        path:'students',       
+        path:'students',  
+        resolve:{ resolvedData:StudentListResolver },
+       
         children:[
           {
             path:'',
-            component: StudentsComponent,
-
+            component: StudentsComponent
           },
           {path:':id',
           //canActivate:[NumericIdGuard],

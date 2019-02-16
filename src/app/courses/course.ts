@@ -9,3 +9,8 @@ export interface ICourse{
    
    
 }
+
+export interface CourseListResolved{
+    courses:ICourse[];
+    error?:any;
+}

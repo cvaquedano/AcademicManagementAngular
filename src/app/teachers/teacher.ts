@@ -8,3 +8,8 @@ export class Teacher{
      
   
 }
+
+export interface TeacherListResolved{
+    teachers:Teacher[];
+    error?:any;
+}

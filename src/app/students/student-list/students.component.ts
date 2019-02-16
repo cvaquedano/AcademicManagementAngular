@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild, OnDestroy,  } from '@angular/core';
-import { IStudent } from '../student';
+import { IStudent, StudentListResolved } from '../student';
 import { StudentService } from '../student.service';
 import { StudentFilterComponent } from '../student-filter/student-filter.component';
 import { StudentFilterParameterService } from '../student-filter/student-filter-parameter.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'am-students',
@@ -25,7 +26,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   sub:Subscription;
 
-  constructor(private studentService:StudentService, private studentFilterParameterService:StudentFilterParameterService){
+  constructor(private route: ActivatedRoute,private studentService:StudentService, private studentFilterParameterService:StudentFilterParameterService){
   
  
 }
@@ -35,14 +36,23 @@ export class StudentsComponent implements OnInit, OnDestroy {
     }
   ngOnInit(): void {
     
-    this.sub= this.studentService.getStudents().subscribe(
-      students=>{
+  //   this.sub=
+  //    this.studentService.getStudents().subscribe(
+  //     students=>{
           
-          this.students=students,          
-          this.filterComponent.listFilter=this.studentFilterParameterService.filterBy;
-       },
-      error=> this.errorMessage=<any>error
-  );   
+  //         this.students=students,          
+  //         this.filterComponent.listFilter=this.studentFilterParameterService.filterBy;
+  //      },
+  //     error=> this.errorMessage=<any>error
+  // ); 
+  
+  this.sub=this.route.data.subscribe(data=>{
+    const resolvedData: StudentListResolved = data['resolvedData'];
+    this.errorMessage = resolvedData.error;    
+    this.students=resolvedData.students;
+    this.filterComponent.listFilter=this.studentFilterParameterService.filterBy;
+    //this.filteredAsignatures=this.asignatures
+  });
   }
 
   onValueChange(value:string):void{

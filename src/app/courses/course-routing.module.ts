@@ -10,6 +10,7 @@ import { CourseDetailFormComponent } from './course-detail-form/course-detail-fo
 import { CourseFormGuard } from './course-form/course-form.guard';
 import { CourseDetailFormGuard } from './course-detail-form/course-detail-form.guard';
 import { AuthGuard } from '../user/auth.guard';
+import { CourseListResolver } from './course-list-resolver.service';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AuthGuard } from '../user/auth.guard';
      {
        path:'courses',
        canActivate:[AuthGuard],
+       resolve:{ resolvedData:CourseListResolver },
 
        children:[
          {  path:'',component: CourseListComponent},

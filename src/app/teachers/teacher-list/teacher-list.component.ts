@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Teacher } from '../teacher';
+import { Teacher, TeacherListResolved } from '../teacher';
 import { TeacherService } from '../teacher.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -45,15 +45,22 @@ export class TeacherListComponent implements OnInit {
 
   
    
-    this.teacherService.getTeachers().subscribe(
-      teachers=>{
+  //   this.teacherService.getTeachers().subscribe(
+  //     teachers=>{
           
-          this.teachers=teachers,
-          this.filteredTeachers=this.teachers
-          this.listFilter=  this.route.snapshot.queryParamMap.get('filterBy') || '';
-       },
-      error=> this.errorMessage=<any>error
-  );
+  //         this.teachers=teachers,
+  //         this.filteredTeachers=this.teachers
+  //         this.listFilter=  this.route.snapshot.queryParamMap.get('filterBy') || '';
+  //      },
+  //     error=> this.errorMessage=<any>error
+  // );
+
+    this.route.data.subscribe(data=>{
+    const resolvedData: TeacherListResolved = data['resolvedData'];
+    this.errorMessage = resolvedData.error;    
+    this.teachers=resolvedData.teachers;
+    this.listFilter=  this.route.snapshot.queryParamMap.get('filterBy') || '';
+  });
    
   }
   onRatingClicked(message:string):void{
